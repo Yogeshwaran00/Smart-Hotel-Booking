@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.Hotel>
+<br />
+<br />
+<a asp-controller="Manager" asp-action="ManagerHome" class="btn btn-primary btn-lg">Back</a>
+<br />
+<br />
+
+<h1>List of Manager Hotels</h1>
+<br />
+<div>
+<a asp-controller="Hotel" asp-action="CreateHotel" class="btn btn-primary">Add New Hotel</a>
+
+<a asp-controller="Room" asp-action="CreateRoom" class="btn btn-primary">Add Room</a>
+</div>
+<br />
+<br />
+@if (Model != null && Model.Any())
+{
+    @foreach (var hotel in Model)
+    {
+        <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+            <div class="container-fluid d-flex align-items-center">
+                <!-- Left Side: Text Content -->
+                <div class="flex-grow-1">
+                    <h1 class="display-5 fw-bold text-primary">@hotel.HotelName</h1>
+                    <p class="col-md-8 fs-4 text-secondary">@hotel.HotelDescription</p>
+                    <div class="mb-2"><strong>Located at:</strong> @hotel.HotelLocation</div>
+                    <p class="col-md-8 fs-4 text-secondary"><strong>Rating :</strong> @hotel.HotelRating</p>
+                    <a asp-controller="Hotel" asp-action="ManagerHotelDetails" asp-route-HotelId="@hotel.HotelId" class="btn btn-primary btn-lg">View Details</a>
+                    <a asp-controller="Hotel" asp-action="EditHotel" asp-route-HotelId="@hotel.HotelId" class="btn btn-primary btn-lg">Edit Hotel Details</a>
+                    <a asp-controller="Hotel" asp-action="DeleteHotel" asp-route-HotelId="@hotel.HotelId" class="btn btn-primary btn-lg" style="background-color:red">Delete Hotel Details</a>
+                </div>
+
+                <!-- Right Side: Image -->
+                <div class="ms-4">
+                    <img src="@hotel.HotelImageUrl" alt="Hotel Image" class="img-fluid rounded" style="max-width: 500px; max-height: 200px;">
+                </div>
+            </div>
+            <div class="container-fluid py-2">
+                <a asp-controller="Hotel" asp-action="ManagerViewRooms" asp-route-HotelId="@hotel.HotelId" class="btn btn-primary btn-lg">View Rooms</a>
+            </div>
+        </div>
+        <br />
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No hotels available.
+    </div>
+}

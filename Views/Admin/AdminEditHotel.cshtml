@@ -1,0 +1,61 @@
+﻿@model SmartHotelBooking.Models.Hotel
+<h1>Edit Hotel:</h1>
+<br />
+<a asp-controller="Hotel" asp-action="ListOfHotels" class="btn btn-primary btn-lg">Back</a>
+<div class="outer-container">
+    <form class="form-container" asp-controller="Admin" asp-action="AdminEditHotel" method="post">
+        <div class="mb-3">
+            <label for="HotelName" class="form-label">Hotel Name:</label>
+            <input type="text" class="form-control" id="HotelName" name="HotelName" value="@Model?.HotelName" required />
+            <span asp-validation-for="HotelName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="HotelDescription" class="form-label">Hotel Description:</label>
+            <input type="text" class="form-control" id="HotelDescription" name="HotelDescription" value="@Model?.HotelDescription" required />
+            <span asp-validation-for="HotelDescription" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="HotelLocation" class="form-label">Hotel Location:</label>
+            <input type="text" class="form-control" id="HotelLocation" name="HotelLocation" value="@Model?.HotelLocation" required />
+            <span asp-validation-for="HotelLocation" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="HotelAmenities" class="form-label">Hotel Amenities:</label>
+            <input type="text" class="form-control" id="HotelAmenities" name="HotelAmenities" value="@Model?.HotelAmenities" required />
+            <span asp-validation-for="HotelAmenities" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="HotelRating" class="form-label">Hotel Rating:</label>
+            <div class="star-rating">
+                @for (int i = 5; i >= 1; i--)
+                {
+                    <input type="radio" id="star-@i" name="HotelRating" value="@i" @(Model?.HotelRating == i ? "checked" : "") />
+                    <label for="star-@i" class="star">&#9733;</label>
+                }
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="HotelPricePerNight" class="form-label">Hotel Price Per Night:</label>
+            <input type="text" class="form-control" id="HotelPricePerNight" name="HotelPricePerNight" value="@Model?.HotelPricePerNight" required />
+            <span asp-validation-for="HotelPricePerNight" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="HotelImageUrl" class="form-label">Hotel Image URL:</label>
+            <input type="text" class="form-control" id="HotelImageUrl" name="HotelImageUrl" value="@Model?.HotelImageUrl" required />
+            <span asp-validation-for="HotelImageUrl" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="HotelManagerId" class="form-label">Select Manager:</label>
+            <select class="form-control" id="HotelManagerId" name="HotelManagerId" required>
+                <option value="">-- Select Manager --</option>
+                @foreach (var manager in ViewBag.Managers as List<SelectListItem>)
+                {
+                    <option value="@manager.Value">@manager.Text</option>
+                }
+            </select>
+            <span asp-validation-for="HotelManagerId" class="text-danger"></span>
+        </div>
+        <input type="hidden" id="HotelId" name="HotelId" value="@Model?.HotelId" />
+        <input type="submit" value="Edit Hotel" class="btn btn-primary" />
+    </form>
+</div>

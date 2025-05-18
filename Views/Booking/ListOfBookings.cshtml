@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.Booking>
+<br />
+<br />
+<a asp-controller="Member" asp-action="MemberHome" class="btn btn-primary btn-lg">Back</a>
+<br />
+<br />
+
+<h1>List of Booked Rooms</h1>
+
+<!-- Search Bar -->
+<form method="get" asp-action="ListOfBookings" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="searchRoom" class="form-control" placeholder="Search by Room Number" value="@ViewData["SearchRoom"]" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var book in Model)
+    {
+        <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold text-primary">Room Number: @book.RoomId</h1>
+                <h1 class="display-5 fw-bold text-primary">Check-In Date: @book.CheckInDate.ToString("dd MMM yyyy HH:mm")</h1>
+                <p class="col-md-8 fs-4 text-secondary">Check-Out Date: @book.CheckOutDate.ToString("dd MMM yyyy HH:mm")</p>
+                <div class="mb-2"><strong>Total Price:</strong> @book.TotalPrice</div>
+                <div class="mb-2"><strong>Status:</strong> @book.Status</div>
+                <p class="col-md-8 fs-4 text-secondary"><strong>Payment Method:</strong> @book.PaymentMethod</p>
+                @if ((book.CheckInDate - DateTime.UtcNow).TotalHours > 24)
+                {
+                    <a asp-controller="Booking" asp-action="CancelBooking" asp-route-BookingId="@book.BookingId" class="btn btn-primary btn-lg">Cancel Booking</a>
+                }
+                else
+                {
+                    <a class="btn btn-secondary btn-lg disabled">Cancel Booking</a>
+                }
+            </div>
+        </div>
+        <br />
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No bookings available.
+    </div>
+}

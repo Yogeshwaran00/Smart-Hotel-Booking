@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.Booking>
+<br />
+<br />
+<a asp-controller="Manager" asp-action="ManagerHome" class="btn btn-primary btn-lg">Back</a>
+<br />
+<br />
+<h1>Bookings for Manager</h1>
+
+<!-- Search Bar -->
+<form method="get" asp-action="ListBookingsForManager" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="searchHotel" class="form-control" placeholder="Search by Hotel Name" value="@ViewData["SearchHotel"]" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Hotel Name</th>
+                <th>Room Type</th>
+                <th>Check-In Date</th>
+                <th>Check-Out Date</th>
+                <th>Total Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.BookingId</td>
+                    <td>@booking.Room?.Hotel?.HotelName</td>
+                    <td>@booking.Room?.RoomType</td>
+                    <td>@booking.CheckInDate.ToShortDateString()</td>
+                    <td>@booking.CheckOutDate.ToShortDateString()</td>
+                    @using System.Globalization
+                    <td>@booking.TotalPrice?.ToString("C", new CultureInfo("hi-IN"))</td>
+
+                    <td>@booking.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">No bookings found.</div>
+}

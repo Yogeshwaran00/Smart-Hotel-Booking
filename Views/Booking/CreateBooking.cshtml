@@ -1,0 +1,49 @@
+﻿@model SmartHotelBooking.Models.Booking
+<br />
+<br/>
+
+<a asp-controller="Hotel" asp-action="ListOfForMemberHotels" class="btn btn-primary btn-lg">Back</a>
+<br />
+<h1>Create Booking</h1>
+<br />
+@if (ViewBag.RedemptionPoints != null)
+{
+    <div class="alert alert-info">
+        <p>You currently have <strong>@ViewBag.RedemptionPoints</strong> redemption points.</p>
+        <p>Earn 2 points for every booking. Redeem 100 points for a free room!</p>
+    </div>
+}
+
+<form class="form-container" asp-controller="Booking" asp-action="CreateBooking" method="post">
+
+    <div class="mb-3">
+        <label for="CheckInDate" class="form-label">Check In Date:</label>
+        <input type="datetime-local" class="form-control" id="CheckInDate" name="CheckInDate"
+               value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="CheckOutDate" class="form-label">Check Out Date:</label>
+        <input type="datetime-local" class="form-control" id="CheckOutDate" name="CheckOutDate"
+               value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm")"
+               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="PaymentMethod" class="form-label">Payment Method:</label>
+        <input type="text" class="form-control" id="PaymentMethod" name="PaymentMethod" value="@Model.PaymentMethod" required />
+    </div>
+
+
+    @if (Model.RegisterUser != null && Model.RegisterUser.IsLoyalCustomer)
+    {
+        <div class="alert alert-success">
+            <p>You are a loyal customer! You will get a 5% discount on the total price.</p>
+        </div>
+    }
+    <input type="hidden" id="RoomId" name="RoomId" value="@Model.RoomId" />
+    <input type="hidden" id="RegisterId" name="RegisterId" value="@Model.RegisterId" />
+    <input type="submit" value="Create Booking" class="btn btn-primary" />
+</form>
+

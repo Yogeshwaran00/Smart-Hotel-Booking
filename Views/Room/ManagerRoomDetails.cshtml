@@ -1,0 +1,27 @@
+﻿@model SmartHotelBooking.Models.Room
+
+<br />
+<br/>
+@if (ViewData["UserRole"]?.ToString() == "Manager")
+{
+    <a asp-controller="Hotel" asp-action="ListOfManagerHotels" class="btn btn-primary btn-lg">Back</a>
+    <a asp-controller="Room" asp-action="EditRoom" asp-route-RoomId="@Model.RoomId" class="btn btn-primary">Edit Room</a>
+    <a asp-controller="Room" asp-action="DeleteRoom" asp-route-RoomId="@Model.RoomId" class="btn btn-primary">Delete Room</a>
+}
+else
+{
+    <a asp-controller="Hotel" asp-action="ListOfHotels" class="btn btn-primary btn-lg">Back</a>
+}
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light rounded-3 shadow-sm">
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-lg-5 my-5">
+            <h1 class="display-5 fw-bold text-primary">@Model.RoomType</h1>
+            <p class="fs-4 text-secondary">@Model.Features</p>
+            <div class="mb-2"><strong>Room Price:</strong> @Model.Price</div>
+            <div class="mb-2"><strong>Room Capacity:</strong> @Model.Capacity</div>
+            <div class="mb-2"><strong>Room Availability:</strong> @(Model.IsAvailable ? "Available" : "Not Available")</div>
+        </div>
+    </div>
+</div>
+

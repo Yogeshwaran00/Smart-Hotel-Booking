@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.Room>
+<br />
+<br />
+<!-- Back Button -->
+<a asp-controller="Hotel" asp-action="ListOfHotels" class="btn btn-primary btn-lg">Back</a>
+<br />
+<br />
+<h2>Rooms:</h2>
+<br />
+
+@if (Model != null && Model.Any())
+{
+    <div class="room-list">
+        @foreach (var room in Model)
+        {
+            <div class="room-card">
+                <div class="room-details">
+                    <h3 class="room-type">@room.RoomType</h3>
+                    @* <p><strong>Features:</strong> @room.Features</p> *@
+                    @* <p><strong>Price:</strong> $@room.Price per night</p> *@
+                    @* <p><strong>Capacity:</strong> @room.Capacity people</p> *@
+                    <p><strong>Status:</strong> @(room.IsAvailable ? "Available" : "Not Available")</p> 
+                    <a asp-controller="Room" asp-action="ManagerRoomDetails" asp-route-RoomId="@room.RoomId" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No rooms available.
+    </div>
+}
+

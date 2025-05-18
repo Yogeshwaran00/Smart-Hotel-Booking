@@ -1,0 +1,57 @@
+﻿@model SmartHotelBooking.Models.Hotel
+<br />
+@if (ViewData["UserRole"]?.ToString() == "Member")
+{
+    <a asp-controller="Hotel" asp-action="ListOfForMemberHotels" class="btn btn-primary btn-lg">Back</a>
+}
+else
+{
+    <a asp-controller="Hotel" asp-action="ListOfHotels" class="btn btn-primary btn-lg">Back</a>
+}
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light rounded-3 shadow-sm">
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-lg-5 my-5">
+            <h1 class="display-5 fw-bold text-primary">@Model.HotelName</h1>
+            <p class="fs-4 text-secondary">@Model.HotelDescription</p>
+            <div class="mb-2"><strong>Location:</strong> @Model.HotelLocation</div>
+            <div class="mb-2"><strong>Manager ID:</strong> @Model.HotelManagerId</div>
+            <div class="mb-2"><strong>Amenities:</strong> @Model.HotelAmenities</div>
+            <div class="mb-2"><strong>Price per Night:</strong> @Model.HotelPricePerNight</div>
+            <div class="mb-2"><strong>Rating:</strong> @Model.HotelRating</div>
+
+            @if (ViewData["UserRole"]?.ToString() == "Member")
+            {
+                <a asp-controller="Review" asp-action="CreateReview" asp-route-hotelid="@Model.HotelId" class="btn btn-primary">Add Review</a>
+            }
+        </div>
+    </div>
+    <!-- Display Reviews -->
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-lg-5 my-5">
+            <h2 class="text-primary">Reviews</h2>
+
+            @if (ViewData["Reviews"] is List<SmartHotelBooking.Models.Review> reviews && reviews.Any())
+            {
+                <ul class="list-group">
+                    @foreach (var review in reviews)
+                    {
+                        <li class="list-group-item">
+                            <strong>Rating:</strong> @review.Rating/5<br />
+                            <strong>Comment:</strong> @review.Comment<br />
+                            <strong>Time:</strong> @review.TimeStamp.ToString("g")<br />
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    No reviews available for this hotel.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

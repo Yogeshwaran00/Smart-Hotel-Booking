@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.RegisterUser>
+<br />
+<br />
+<!-- Back Button -->
+<a asp-controller="Admin" asp-action="AdminHome" class="btn btn-primary btn-lg">Back</a>
+<br />
+<br />
+
+<h1>List of Users</h1>
+
+<!-- Search Bar -->
+<form method="get" asp-action="ListOfUsers" class="search-bar mb-4">
+    <div class="input-group">
+        <input type="text" name="searchQuery" class="form-control" placeholder="Search by Name, Email, or Role" value="@ViewBag.SearchQuery" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    @if (@user.Role != "Admin")
+                    {
+                        <tr>
+                            <td>@user.FirstName @user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@user.Role</td>
+                            <td>
+                                <a asp-action="DeleteUsers" asp-route-UserId="@user.RegisterId" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">No users found.</div>
+}

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.Room>
+<h1>List of Rooms</h1>
+<br />
+<a asp-controller="Room" asp-action="CreateRoom" class="btn btn-primary">Add Room</a>
+<br />
+<br />
+<br/>
+
+@if (Model != null && Model.Any())
+
+{
+
+    @foreach (var room in Model)
+
+    {
+        <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold text-primary">@room.RoomType</h1>
+                <p class="col-md-8 fs-4 text-secondary">@room.Features</p>
+                <div class="mb-2"><strong>Room Price:</strong> @room.Price</div>
+                <p class="col-md-8 fs-4 text-secondary"><strong>Room Capacity:</strong>@room.Capacity</p>
+                <p class="col-md-8 fs-4 text-secondary"><strong>Room Availability :</strong>@room.IsAvailable</p>
+                <a asp-controller="Room" asp-action="RoomDetails" asp-route-RoomId="@room.RoomId" class="btn btn-primary btn-lg">View Room Details</a>
+                <a asp-controller="Room" asp-action="EditRoom" asp-route-RoomId="@room.RoomId" class="btn btn-primary btn-lg">Edit Room Details</a>
+                <a asp-controller="Room" asp-action="DeleteRoom" asp-route-RoomId="@room.RoomId" class="btn btn-primary btn-lg" style="background-color:red">Delete Room Details</a>
+            </div>
+        </div>
+        <br />
+
+    }
+
+}
+
+else
+
+{
+    <div class="alert alert-warning" role="alert">
+
+        No Room available.
+    </div>
+
+}

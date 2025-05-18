@@ -1,0 +1,41 @@
+﻿@model SmartHotelBooking.Models.Room
+
+<h1>Edit Room</h1>
+<br />
+<div class="outer-container">
+<form class="form-container" asp-action="EditRoom" method="post">
+	<input type="hidden" asp-for="RoomId" />
+		<div class="mb-3">
+		<label asp-for="RoomType" class="form-label"></label>
+		<input asp-for="RoomType" class="form-control" />
+		<span asp-validation-for="RoomType" class="text-danger"></span>
+	</div>
+		<div class="mb-3">
+		<label asp-for="Features" class="form-label"></label>
+		<input asp-for="Features" class="form-control" />
+		<span asp-validation-for="Features" class="text-danger"></span>
+	</div>
+		<div class="mb-3">
+		<label asp-for="Price" class="form-label"></label>
+		<input asp-for="Price" class="form-control" />
+		<span asp-validation-for="Price" class="text-danger"></span>
+	</div>
+		<div class="mb-3">
+		<label asp-for="Capacity" class="form-label"></label>
+		<input asp-for="Capacity" class="form-control" />
+		<span asp-validation-for="Capacity" class="text-danger"></span>
+	</div>
+		<div class="mb-3">
+		<label asp-for="IsAvailable" class="form-label"></label>
+		<input asp-for="IsAvailable" class="form-check-input" type="checkbox" />
+		<span asp-validation-for="IsAvailable" class="text-danger"></span>
+	</div>
+		<div class="mb-3">
+		<label asp-for="HotelId" class="form-label"></label>
+		<select asp-for="HotelId" asp-items="ViewBag.HotelId" class="form-control"></select>
+		<span asp-validation-for="HotelId" class="text-danger"></span>
+	</div>
+	<button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+

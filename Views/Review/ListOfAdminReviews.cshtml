@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.Review>
+<br />
+<br />
+<a asp-controller="Admin" asp-action="AdminHome" class="btn btn-primary btn-lg">Back</a>
+<br />
+<br />
+    <h2>Reviews</h2>
+@if (Model != null && Model.Any())
+
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Hotel Name</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Action</th>
+                @* <th>User</th> *@
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model)
+
+            {
+                <tr>
+                    <td>@review.HotelName</td>
+                    <td>@review.Rating</td>
+                    <td>@review.Comment</td>
+                    <td>
+                        <a asp-action="AdminDeleteReview" asp-route-reviewId="@review.ReviewId" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="alert alert-warning">No reviews found.</div>
+}

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SmartHotelBooking.Models.Review>
+<br />
+<br />
+<a asp-controller="Member" asp-action="MemberHome" class="btn btn-primary btn-lg">Back</a>
+<br />
+<br />
+
+<h2>Reviews</h2>
+<br />
+<a asp-controller="Review" asp-action="ListOfUserReviews" class="btn btn-primary">Yours Review</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hotel Name</th>
+            <th>Rating</th>
+            <th>Comment</th>
+
+            @* <th>User</th> *@
+            
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var review in Model)
+
+        {
+            <tr>
+                <td>@review.HotelName</td>
+                <td>@review.Rating</td>
+                <td>@review.Comment</td>
+               
+            </tr>
+
+        }
+    </tbody>
+</table>
+

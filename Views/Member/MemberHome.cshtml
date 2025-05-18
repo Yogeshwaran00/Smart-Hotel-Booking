@@ -1,0 +1,70 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SmartHotelBooking</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="ListOfForMemberHotels">Hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="ListOfBookings">Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Review" asp-action="ListOfReviews">Reviews</a>
+                    </li>
+
+                    @if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+                        </li>
+
+                    }
+
+                    else
+
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.tg5xKPOOv4fpR0oFu2mbBQHaE8?w=272&h=181&c=7&r=0&o=7&cb=iwp1&dpr=1.5&pid=1.7&rm=3" class="img-fluid box-shadow mb-3 fixed-size" alt="Image 1">
+        </div>
+        <div class="col-md-4">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.BnQn3zCS9eixVHdZ4X4ANwHaFj?w=238&h=180&c=7&r=0&o=7&cb=iwp1&dpr=1.5&pid=1.7&rm=3" class="img-fluid box-shadow mb-3 fixed-size" alt="Image 2">
+        </div>
+        <div class="col-md-4">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.Z_Q09xr_RWyU44-BV1VctAHaFY?w=253&h=184&c=7&r=0&o=7&cb=iwp1&dpr=1.5&pid=1.7&rm=3" class="img-fluid box-shadow mb-3 fixed-size" alt="Image 3">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.OnHdWT5KmR1r4rwOMlpCZQHaEo?w=252&h=180&c=7&r=0&o=7&cb=iwp1&dpr=1.5&pid=1.7&rm=3" class="img-fluid box-shadow mb-3 fixed-size" alt="Image 4">
+        </div>
+        <div class="col-md-4">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.rattICEWxGbcq02gmlaPJAHaE8?w=241&h=180&c=7&r=0&o=7&cb=iwp1&dpr=1.5&pid=1.7&rm=3" class="img-fluid box-shadow mb-3 fixed-size" alt="Image 5">
+        </div>
+        <div class="col-md-4">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.6tEokJ3OiDWyZEtydQb4MQHaFj?w=214&h=180&c=7&r=0&o=7&cb=iwp1&dpr=1.5&pid=1.7&rm=3" class="img-fluid box-shadow mb-3 fixed-size" alt="Image 6">
+        </div>
+    </div>
+</div>
